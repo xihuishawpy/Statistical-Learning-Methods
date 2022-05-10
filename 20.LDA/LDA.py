@@ -22,13 +22,13 @@ def lda(texts, word_prior_cnt=None, topic_prior_cnt=None, k=5, max_iteration=100
     if word_prior_cnt is not None:
         n_topic_word += word_prior_cnt[None, :]
 
-    topic = [[np.random.choice(k) for word in text] for text in texts]
+    topic = [[np.random.choice(k) for _ in text] for text in texts]
     for i, (text, text_topic) in enumerate(zip(texts, topic)):
         for word, word_topic in zip(text, text_topic):
             n_text_topic[i, word_topic] += 1
             n_topic_word[word_topic, word] += 1
 
-    for step in range(max_iteration):
+    for _ in range(max_iteration):
         for i, (text, text_topic) in enumerate(zip(texts, topic)):
             for j, (word, word_topic) in enumerate(zip(text, text_topic)):
                 # reduce the current value from the count

@@ -21,7 +21,7 @@ class NaiveBayesMAP:
     def fit(self, X, Y):
         y_cnt = Counter(Y)
         for col in range(len(X[0])):
-            col_values = set(x[col] for x in X)
+            col_values = {x[col] for x in X}
             for x, y in zip(X, Y):
                 self.pa_y[y][col][x[col]] += 1
             for y in y_cnt:

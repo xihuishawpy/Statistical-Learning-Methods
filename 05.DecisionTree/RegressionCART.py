@@ -27,8 +27,7 @@ class RegressionCART:
     def get_se(self, Y_cnt):
         """get square error given the count of each Y value"""
         mean = sum(y * Y_cnt[y] for y in Y_cnt) / sum(Y_cnt.values())
-        square_error = sum((y - mean) ** 2 * Y_cnt[y] for y in Y_cnt)
-        return square_error
+        return sum((y - mean) ** 2 * Y_cnt[y] for y in Y_cnt)
 
     def get_se_of_split(self, Y1_cnt, Y2_cnt):
         """get the square error of a split"""

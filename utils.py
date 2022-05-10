@@ -10,10 +10,7 @@ class Heap:
     def __init__(self, arr=None, key=lambda x: x, max_len=inf):
         self.key = key
         self.max_len = max_len
-        if not arr:
-            self.h = []
-        else:
-            self.h = [(self.key(i), i) for i in arr]
+        self.h = [(self.key(i), i) for i in arr] if arr else []
         heapq.heapify(self.h)
         self.i = 0
 
@@ -59,8 +56,7 @@ def sigmoid(x):
     return 1 / (np.exp(-x) + 1)
 
 def binary_cross_entropy(pred, Y):
-    loss = -(Y * np.log(pred) + (1 - Y) * np.log(1 - pred)).sum()
-    return loss
+    return -(Y * np.log(pred) + (1 - Y) * np.log(1 - pred)).sum()
 
 def softmax(logits, axis=-1):
     exps = np.exp(logits)
@@ -112,10 +108,9 @@ def row_echelon(A):
     """
     # convert A to row echolon form
     row_cnt, col_cnt = A.shape
-    col = 0
     rank = 0
     # from top to the bottom
-    for i in range(row_cnt):
+    for col, i in enumerate(range(row_cnt)):
         find = False
         while not find and col < col_cnt:
             # look for the first non-zero value in current column
@@ -133,7 +128,6 @@ def row_echelon(A):
             # if not found, check the next column
             else:
                 col += 1
-        col += 1
     # from bottom to the top
     for i in range(row_cnt - 1, -1, -1):
         # find the first non-zero value and eliminate
@@ -152,10 +146,9 @@ def get_solution_domain(A):
     """
     row_cnt, col_cnt = A.shape
     A = row_echelon(A)
-    col = 0
     nonzero_cols = []
     ans = []
-    for i in range(row_cnt):
+    for col, i in enumerate(range(row_cnt)):
         while col != col_cnt and A[i][col] == 0.:
             ans.append(one_hot(col, col_cnt))
             for j, j_col in enumerate(nonzero_cols):
@@ -164,8 +157,6 @@ def get_solution_domain(A):
             col += 1
         # record the first nonzero value of each row
         nonzero_cols.append(col)
-        col += 1
-
     for col in range(col, col_cnt):
         ans.append(one_hot(col, col_cnt))
         for i, j in enumerate(nonzero_cols):
@@ -181,8 +172,7 @@ def get_solution_domain(A):
 def entropy(p):
     s = sum(p)
     p = [i / s for i in p]
-    ans = sum(-i * log(i, 2) for i in p)
-    return ans
+    return sum(-i * log(i, 2) for i in p)
 
 def entropy_of_split(X, Y, col):
     """calculate the conditional entropy of splitting data by col"""

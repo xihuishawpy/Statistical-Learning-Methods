@@ -72,8 +72,7 @@ class AdaBoost:
     def predict(self, X):
         score = sum(model.predict(X) * weight for model, weight in
                     zip(self.basic_models, self.model_weights))
-        pred = (score > 0.).astype(int) * 2 - 1
-        return pred
+        return (score > 0.).astype(int) * 2 - 1
 
 if __name__ == "__main__":
     def demonstrate(X, Y, desc):

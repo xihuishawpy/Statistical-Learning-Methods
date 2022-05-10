@@ -48,10 +48,7 @@ if __name__ == '__main__':
     covariance_inv = np.linalg.inv(covariance)
     det_convariance = 1
     def gaussian_sampler2(x, j):
-        if j == 0:
-            return np.random.normal(2)
-        else:
-            return np.random.normal(3)
+        return np.random.normal(2) if j == 0 else np.random.normal(3)
     demonstrate(2, gaussian_sampler2, "Gaussian distribution with mean of 2 and 3")
 
     # example 3:

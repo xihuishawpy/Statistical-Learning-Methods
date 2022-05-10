@@ -22,7 +22,7 @@ class Agglomerative:
         data_size, feature_size = X.shape
         self.cluster_num = data_size
 
-        self.parent = [i for i in range(data_size)]
+        self.parent = list(range(data_size))
         dis = euc_dis(X[:, None, :], X[None, :, :])
         sorted_a, sorted_b = np.unravel_index(np.argsort(dis, axis=None), dis.shape)
         for a, b in zip(sorted_a, sorted_b):

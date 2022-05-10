@@ -18,8 +18,7 @@ class KNN:
 
     def _knn(self, x):
         dis = np.apply_along_axis(partial(self.distance_func, y=x), axis=-1, arr=self.X)
-        topk_ind = np.argpartition(dis, self.k)[:self.k]
-        return topk_ind
+        return np.argpartition(dis, self.k)[:self.k]
 
     def _predict(self, x):
         topk_ind = self._knn(x)

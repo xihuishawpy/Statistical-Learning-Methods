@@ -19,8 +19,7 @@ class MaxEntropy:
         calculate probability table according to w
         """
         logit = (w[:, None, None] * self.feature).sum(axis=0)
-        p_w = softmax(logit, axis=-1)
-        return p_w
+        return softmax(logit, axis=-1)
 
     def _f(self, w):
         """

@@ -18,7 +18,7 @@ def plsa(word_text, k=5, max_iteration=1000, epsilon=1e-8):
 
     text_word = word_text.T
     text_word_cnt = text_word.sum(axis=-1, keepdims=True)
-    for i in range(max_iteration):
+    for _ in range(max_iteration):
         # E step: calculate the expectation of each topic for each word-text pair
         p_topic_when_text_word = p_topic_when_text[:, :, None] * p_word_when_topic[None, :, :]
         p_topic_when_text_word /= p_topic_when_text_word.sum(axis=1, keepdims=True) + epsilon

@@ -40,7 +40,7 @@ class C45:
                 print(f"Split by {col}th column")
                 split = True
                 cur.col = col
-                for val in set(x[col] for x in X):
+                for val in {x[col] for x in X}:
                     ind = [x[col] == val for x in X]
                     child_X = [x for i, x in zip(ind, X) if i]
                     child_Y = [y for i, y in zip(ind, Y) if i]
