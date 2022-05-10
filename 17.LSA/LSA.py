@@ -15,7 +15,7 @@ def lsa(word_text, k=5, max_iteration=1000):
     n_word, n_text = word_text.shape
     word_topic = np.random.rand(n_word, k)
     topic_text = np.random.rand(k, n_text)
-    for i in range(max_iteration):
+    for _ in range(max_iteration):
         word_topic *= (word_text @ topic_text.T) / (word_topic @ topic_text @ topic_text.T)
         topic_text *= (word_topic.T @ word_text) / (word_topic.T @ word_topic @ topic_text)
     return word_topic, topic_text.T

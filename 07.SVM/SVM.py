@@ -123,10 +123,8 @@ class SVM:
         step_cnt = 0
         while self._smo_step(step_cnt) and step_cnt < self.max_steps:
             step_cnt += 1
-            pass
-
         # optimized, get w and b
-        support_vector_ind = 0 < self.alpha
+        support_vector_ind = self.alpha > 0
         self._support_vectors = X[support_vector_ind]
         self._support_Y = Y[support_vector_ind]
         self._support_alpha = self.alpha[support_vector_ind]
@@ -147,9 +145,7 @@ class SVM:
 
     def predict(self, X):
         score = np.apply_along_axis(self._predict, -1, X)
-        # score = (self.w * X).sum(axis=-1) + self.b
-        pred = (score >= 0).astype(int) * 2 - 1
-        return pred
+        return (score >= 0).astype(int) * 2 - 1
 
 if __name__ == "__main__":
     def demonstrate(X, Y, desc, draw=True, **args):

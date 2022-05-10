@@ -41,13 +41,11 @@ class LogisticRegression:
 
     def _predict(self, X):
         logit = self.w @ X.transpose() + self.b
-        p = sigmoid(logit)
-        return p
+        return sigmoid(logit)
 
     def predict(self, X):
         p = self._predict(X)
-        Y = (p > .5).astype(int)
-        return Y
+        return (p > .5).astype(int)
 
 if __name__ == "__main__":
     def demonstrate(X, Y, desc):

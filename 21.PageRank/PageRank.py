@@ -16,7 +16,7 @@ def pageRank(graph, d, max_iteration=1000, epsilon=1e-8):
     p = np.ones(n) / n
     graph /= (graph.sum(axis=-1, keepdims=True) + epsilon)
     graph = graph.T
-    for i in range(max_iteration):
+    for _ in range(max_iteration):
         pre_p = p
         p = d * graph @ p + (1 - d) / n
         if max(p - pre_p) < epsilon:

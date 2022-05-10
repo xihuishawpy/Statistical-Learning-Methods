@@ -25,7 +25,7 @@ class GMM:
             self.mean = np.random.multivariate_normal(X.mean(axis=0), self.cov[0], [self.k])
 
         pre_likelihood = np.zeros([self.k, n])
-        for step in range(self.max_step):
+        for _ in range(self.max_step):
             ##########################################
             # Expectation step
             ##########################################
